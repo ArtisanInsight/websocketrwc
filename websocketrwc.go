@@ -37,7 +37,7 @@ var (
 	// PongTimeout determines the period of time a connection will wait for a
 	// Pong response to Pings sent to the client.
 	PongTimeout = 60 * time.Second
-	// PingInterval determins the interval at which Pings are sent to the
+	// PingInterval determines the interval at which Pings are sent to the
 	// client.
 	PingInterval = (PongTimeout * 9) / 10
 )
@@ -234,7 +234,11 @@ func Dial(addr string, dialer *websocket.Dialer) (*Conn, error) {
 		return conn.ws.SetReadDeadline(time.Now().Add(PongTimeout))
 	})
 
-	// Start ping loop for client keep-alive.
-	go conn.pinger()
+	// Respond to Ping with a Pong
+	conn.ws.SetPingHandler(func(appData string) error {
+		fmt.Printf("received ping")
+		return conn.ws.WriteControl(websocket.PongMessage, []byte{}, time.Now().Add(WriteTimeout))
+	})
+
 	return conn, nil
 }
