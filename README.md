@@ -1,8 +1,10 @@
-[![GoDoc](https://godoc.org/github.com/pdf/websocketrwc?status.svg)](http://godoc.org/github.com/pdf/websocketrwc) ![License-MIT](http://img.shields.io/badge/license-MIT-red.svg)
-
 # websocketrwc
+
+Fork of https://github.com/pdf/websocketrwc/tree/master
+Forked so we can add a client Dial method
+
 --
-    import "github.com/pdf/websocketrwc"
+    import "github.com/artisaninsight/websocketrwc"
 
 Package websocketrwc wraps Gorilla websocket in an io.ReadWriteCloser compatible
 interface, allowing it to be used as a net/rpc or similar connection. Only the
